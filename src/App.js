@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import { OTSession, OTStreams, preloadScript } from 'opentok-react'
+import ConnectionStatus from './components/ConnectionStatus'
+import Publisher from './components/Publisher'
+import Subscriber from './components/Subscriber'
+import './App.css'
 
-function App() {
+function App({ apiKey, sessionId, token }) {
+  const [connected, setConnected] = useState(false)
+  const [error, setError] = useState()
+
+  const sessionConnected = () => setConnected(true)
+  const sessionDisconnected = () => setConnected(false)
+  const handleError = (err) => {
+    setError('Failed to connect!')
+    console.error(err)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <OTSession
+      apiKey={apiKey}
+      sessionId={sessionId}
+      token={token}
+      eventHandlers={{ sessionConnected, sessionDisconnected }}
+      onError={handleError}
+    >
+      {error && <div id="error">{error}</div>}
+      <ConnectionStatus connected={connected} />
+      <Publisher />
+      <OTStreams>
+        <Subscriber />
+      </OTStreams>
+    </OTSession>
+  )
 }
 
-export default App;
+export default preloadScript(App)
