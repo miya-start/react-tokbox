@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .connectionStatus {
+    padding-top: 20px;
+    margin-left: 5%;
+    font-size: 1.5em;
+  }
+  .error {
+    @apply text-red-500;
+  }
+}
+
+.OTPublisherContainer,
+.OTSubscriberContainer {
+  @apply w-full !important;
+  height: max(60vw, 200px) !important;
+}

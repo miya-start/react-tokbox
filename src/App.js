@@ -3,7 +3,6 @@ import { OTSession, OTStreams, preloadScript } from 'opentok-react'
 import ConnectionStatus from './components/ConnectionStatus'
 import Publisher from './components/Publisher'
 import Subscriber from './components/Subscriber'
-import './App.css'
 
 function App({ apiKey, sessionId, token }) {
   const [connected, setConnected] = useState(false)
