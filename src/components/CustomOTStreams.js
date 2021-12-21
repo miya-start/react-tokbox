@@ -1,10 +1,14 @@
 import { Children, cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import OTSubscriberContext from './OTSubscriberContext'
+import { useSubscriberNumberUpdate } from './SubscriberNumberContext'
 
 export default function CustomOTStreams(props, context) {
   const session = props.session || context.session || null
   const streams = props.streams || context.streams || null
+
+  const subscriberNumberUpdate = useSubscriberNumberUpdate()
+  subscriberNumberUpdate(streams ? streams.length : 0)
 
   if (!session) {
     return <div />
