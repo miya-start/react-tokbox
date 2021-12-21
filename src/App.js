@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { OTSession, OTStreams, preloadScript } from 'opentok-react'
+import { OTSession, preloadScript } from 'opentok-react'
 import ConnectionStatus from './components/ConnectionStatus'
 import Publisher from './components/Publisher'
 import Subscriber from './components/Subscriber'
+import CustomOTStreams from './components/CustomOTStreams'
 
 function App({ apiKey, sessionId, token }) {
   const [connected, setConnected] = useState(false)
@@ -23,12 +24,14 @@ function App({ apiKey, sessionId, token }) {
       eventHandlers={{ sessionConnected, sessionDisconnected }}
       onError={handleError}
     >
-      {error && <div id="error">{error}</div>}
-      <ConnectionStatus connected={connected} />
-      <Publisher />
-      <OTStreams>
-        <Subscriber />
-      </OTStreams>
+      <div className="grid grid-cols-2 gap-2">
+        {/* {error && <div id="error">{error}</div>} */}
+        {/* <ConnectionStatus connected={connected} /> */}
+        <Publisher />
+        <CustomOTStreams>
+          <Subscriber />
+        </CustomOTStreams>
+      </div>
     </OTSession>
   )
 }
