@@ -5,7 +5,7 @@ import CheckBox from './CheckBox'
 function Subscriber() {
   const [error, setError] = useState()
   const [isAudio, setIsAudio] = useState(false)
-  const [isVideo, setIsVideo] = useState(false)
+  const [isVideo, setIsVideo] = useState(true)
 
   const handleAudio = (isChecked) => {
     setIsAudio(isChecked)

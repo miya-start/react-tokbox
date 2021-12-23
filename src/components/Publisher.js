@@ -1,22 +1,20 @@
 import { useState } from 'react'
-import { useCalcVideoSize } from '../contexts/SubscriberNumberContext'
+import { useCalcVideoSize } from '../contexts/subscriber-number-context'
 import CustomOTPublisher from './CustomOTPublisher'
-import CheckBox from './CheckBox'
+import { useVideoState } from '../contexts/video-context'
 
 function Publisher() {
   const [error, setError] = useState()
   const [isAudio, setIsAudio] = useState(false)
-  const [isVideo, setIsVideo] = useState(false)
+
   const [videoSource, setVideoSource] = useState('camera')
+
+  const { isVideo } = useVideoState()
 
   const [videoWidth, videoHeight] = useCalcVideoSize()
 
   const handleAudio = (isChecked) => {
     setIsAudio(isChecked)
-  }
-
-  const handleVideo = (isChecked) => {
-    setIsVideo(isChecked)
   }
 
   const changeVideoSource = () => {

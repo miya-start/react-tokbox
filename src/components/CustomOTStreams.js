@@ -1,10 +1,10 @@
 import { Children, cloneElement, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import CustomOTSubscriberContext from '../contexts/CustomOTSubscriberContext'
+import CustomOTSubscriberContext from '../contexts/custom-otsubscriber-context'
 import {
   useCalcVideoSize,
   useSubscriberNumberUpdate,
-} from '../contexts/SubscriberNumberContext'
+} from '../contexts/subscriber-number-context'
 
 export default function CustomOTStreams(props, context) {
   const session = props.session || context.session || null

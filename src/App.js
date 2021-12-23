@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { OTSession, preloadScript } from 'opentok-react'
 import ConnectionStatus from './components/ConnectionStatus'
 import CustomOTStreams from './components/CustomOTStreams'
-import Layout from './components/Layout'
+import Menu from './components/Menu'
 import Publisher from './components/Publisher'
 import Subscriber from './components/Subscriber'
-import { SubscriberNumberProvider } from './contexts/SubscriberNumberContext'
+import VideosWrapper from './components/VideosWrapper'
+import { SubscriberNumberProvider } from './contexts/subscriber-number-context'
+import { VideoProvider } from './contexts/video-context'
 
 function App({ apiKey, sessionId, token }) {
   const [connected, setConnected] = useState(false)
@@ -26,16 +28,19 @@ function App({ apiKey, sessionId, token }) {
       eventHandlers={{ sessionConnected, sessionDisconnected }}
       onError={handleError}
     >
-      <SubscriberNumberProvider>
-        <Layout>
-          {/* {error && <div id="error">{error}</div>} */}
-          {/* <ConnectionStatus connected={connected} /> */}
-          <Publisher />
-          <CustomOTStreams>
-            <Subscriber />
-          </CustomOTStreams>
-        </Layout>
-      </SubscriberNumberProvider>
+      <VideoProvider>
+        <SubscriberNumberProvider>
+          <VideosWrapper>
+            {/* {error && <div id="error">{error}</div>} */}
+            {/* <ConnectionStatus connected={connected} /> */}
+            <Publisher />
+            <CustomOTStreams>
+              <Subscriber />
+            </CustomOTStreams>
+          </VideosWrapper>
+        </SubscriberNumberProvider>
+        <Menu />
+      </VideoProvider>
     </OTSession>
   )
 }
