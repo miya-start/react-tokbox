@@ -139,7 +139,7 @@ export default class CustomOTSubscriber extends Component {
     const { className, style } = this.props
     return (
       <div
-        className={(className, 'h-full')}
+        className={`${className} h-full`}
         style={style}
         ref={(node) => {
           this.node = node

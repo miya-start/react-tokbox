@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { OTPublisher } from 'opentok-react'
+import { useCalcVideoSize } from '../contexts/SubscriberNumberContext'
+import CustomOTPublisher from './CustomOTPublisher'
 import CheckBox from './CheckBox'
 
 function Publisher() {
@@ -7,6 +8,8 @@ function Publisher() {
   const [isAudio, setIsAudio] = useState(false)
   const [isVideo, setIsVideo] = useState(false)
   const [videoSource, setVideoSource] = useState('camera')
+
+  const [videoWidth, videoHeight] = useCalcVideoSize()
 
   const handleAudio = (isChecked) => {
     setIsAudio(isChecked)
@@ -28,12 +31,14 @@ function Publisher() {
   }
 
   return (
-    <OTPublisher
+    <CustomOTPublisher
       properties={{
         publishAudio: isAudio,
         publishVideo: isVideo,
         videoSource: videoSource === 'screen' ? 'screen' : undefined,
       }}
+      videoWidth={videoWidth}
+      videoHeight={videoHeight}
       onError={handleError}
     />
     // <>
