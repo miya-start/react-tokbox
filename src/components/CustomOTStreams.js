@@ -1,35 +1,46 @@
-import { Children, cloneElement } from 'react'
+import { Children, cloneElement, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import OTSubscriberContext from './OTSubscriberContext'
-import { useSubscriberNumberUpdate } from './SubscriberNumberContext'
+import CustomOTSubscriberContext from '../contexts/CustomOTSubscriberContext'
+import {
+  useCalcVideoSize,
+  useSubscriberNumberUpdate,
+} from '../contexts/SubscriberNumberContext'
 
 export default function CustomOTStreams(props, context) {
   const session = props.session || context.session || null
   const streams = props.streams || context.streams || null
 
   const subscriberNumberUpdate = useSubscriberNumberUpdate()
-  subscriberNumberUpdate(streams ? streams.length : 0)
+  useEffect(() => {
+    subscriberNumberUpdate(streams?.length ?? 0)
+  }, [streams?.length, subscriberNumberUpdate])
+
+  const [videoWidth, videoHeight] = useCalcVideoSize()
 
   if (!session) {
     return <div />
   }
 
   const child = Children.only(props.children)
-  console.log(streams.length)
 
   const childrenWithContextWrapper = Array.isArray(streams)
     ? streams.map((stream) =>
         child ? (
-          <OTSubscriberContext stream={stream} key={stream.id}>
+          <CustomOTSubscriberContext
+            stream={stream}
+            videoWidth={videoWidth}
+            videoHeight={videoHeight}
+            key={stream.id}
+          >
             {cloneElement(child)}
-          </OTSubscriberContext>
+          </CustomOTSubscriberContext>
         ) : (
           child
         )
       )
     : null
 
-  return <div>{childrenWithContextWrapper}</div>
+  return childrenWithContextWrapper
 }
 
 CustomOTStreams.propTypes = {

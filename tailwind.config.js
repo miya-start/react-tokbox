@@ -2,6 +2,7 @@ const { sky, trueGray } = require('tailwindcss/colors')
 
 module.exports = {
   content: ['./src/**/*.{js,jsx}', './public/index.html'],
+  important: true,
   theme: {
     extend: {
       colors: {

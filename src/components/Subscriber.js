@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { OTSubscriber } from 'opentok-react'
+import CustomOTSubscriber from './CustomOTSubscriber'
 import CheckBox from './CheckBox'
 
 function Subscriber() {
   const [error, setError] = useState()
-  const [isAudio, setIsAudio] = useState(true)
-  const [isVideo, setIsVideo] = useState(true)
+  const [isAudio, setIsAudio] = useState(false)
+  const [isVideo, setIsVideo] = useState(false)
 
   const handleAudio = (isChecked) => {
     setIsAudio(isChecked)
@@ -20,18 +20,19 @@ function Subscriber() {
     console.error(err)
   }
 
+  const calcHeight = (params) => {}
+
   return (
-    <div className="subscriber">
-      Subscriber
+    <>
       {error && <div id="error">{error}</div>}
-      <OTSubscriber
+      <CustomOTSubscriber
         properties={{
           subscribeToAudio: isAudio,
           subscribeToVideo: isVideo,
         }}
         onError={handleError}
       />
-      <CheckBox
+      {/* <CheckBox
         label="Subscribe to Audio"
         initialChecked={isAudio}
         onChange={handleAudio}
@@ -40,8 +41,8 @@ function Subscriber() {
         label="Subscribe to Video"
         initialChecked={isVideo}
         onChange={handleVideo}
-      />
-    </div>
+      /> */}
+    </>
   )
 }
 

@@ -24,6 +24,14 @@ function useSubscriberNumberState() {
   return context
 }
 
+function useCalcVideoSize() {
+  const subscriberNumber = useSubscriberNumberState()
+  const videoNumber = subscriberNumber + 1
+  const videoWidth = `${100 / Math.ceil(Math.sqrt(videoNumber))}vw`
+  const videoHeight = `${100 / Math.round(Math.sqrt(videoNumber))}vh`
+  return [videoWidth, videoHeight]
+}
+
 function useSubscriberNumberUpdate() {
   const context = useContext(SubscriberNumberUpdateContext)
   if (context === undefined) {
@@ -34,8 +42,4 @@ function useSubscriberNumberUpdate() {
   return context
 }
 
-export {
-  SubscriberNumberProvider,
-  useSubscriberNumberState,
-  useSubscriberNumberUpdate,
-}
+export { SubscriberNumberProvider, useCalcVideoSize, useSubscriberNumberUpdate }

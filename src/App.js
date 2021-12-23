@@ -5,7 +5,7 @@ import CustomOTStreams from './components/CustomOTStreams'
 import Layout from './components/Layout'
 import Publisher from './components/Publisher'
 import Subscriber from './components/Subscriber'
-import { SubscriberNumberProvider } from './components/SubscriberNumberContext'
+import { SubscriberNumberProvider } from './contexts/SubscriberNumberContext'
 
 function App({ apiKey, sessionId, token }) {
   const [connected, setConnected] = useState(false)

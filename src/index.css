@@ -16,5 +16,5 @@
 .OTPublisherContainer,
 .OTSubscriberContainer {
   @apply w-full !important;
-  height: max(60vw, 200px) !important;
+  @apply h-full !important;
 }
