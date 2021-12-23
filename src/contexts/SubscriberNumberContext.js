@@ -24,12 +24,49 @@ function useSubscriberNumberState() {
   return context
 }
 
+function getWindowDimensions() {
+  const { innerWidth, innerHeight } = window
+  return [innerWidth, innerHeight]
+}
+
+function menuHeightSpace(
+  windowHeight,
+  videoHeight,
+  rowNumber,
+  menu_height = 50 // px
+) {
+  const windowSpace = windowHeight - videoHeight * rowNumber
+  return windowSpace > menu_height
+    ? 0
+    : ((menu_height - windowSpace) / rowNumber / windowHeight) * 100
+}
+
+function adjustVideoHeight(widthViewport, videoNumber, maxRatio = 1.5) {
+  const [windowWidth, windowHeight] = getWindowDimensions()
+  const rowNumber = Math.round(Math.sqrt(videoNumber))
+  const heightViewport = 100 / rowNumber
+  const width = (windowWidth * widthViewport) / 100
+  const tmpHeight = (windowHeight * heightViewport) / 100
+  const maxHeight = width * maxRatio
+  if (maxHeight > tmpHeight) {
+    return heightViewport - menuHeightSpace(windowHeight, tmpHeight, rowNumber)
+  }
+  // tmpHeight * X = maxHeight
+  // X = maxHeight / tmpHeight
+  return (
+    heightViewport * (maxHeight / tmpHeight) -
+    menuHeightSpace(windowHeight, maxHeight, rowNumber)
+  )
+}
+
 function useCalcVideoSize() {
   const subscriberNumber = useSubscriberNumberState()
   const videoNumber = subscriberNumber + 1
-  const videoWidth = `${100 / Math.ceil(Math.sqrt(videoNumber))}vw`
-  const videoHeight = `${100 / Math.round(Math.sqrt(videoNumber))}vh`
-  return [videoWidth, videoHeight]
+  const columnNumber = Math.ceil(Math.sqrt(videoNumber))
+  const videoWidthViewport = 100 / columnNumber
+  const videoHeightViewport = adjustVideoHeight(videoWidthViewport, videoNumber)
+
+  return [`${videoWidthViewport}vw`, `${videoHeightViewport}vh`]
 }
 
 function useSubscriberNumberUpdate() {
