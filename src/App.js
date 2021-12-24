@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
 import { OTSession, preloadScript } from 'opentok-react'
-import ConnectionStatus from './components/ConnectionStatus'
 import CustomOTStreams from './components/CustomOTStreams'
 import HeadlessDialog from './components/HeadlessDialog'
 import Menu from './components/Menu'
