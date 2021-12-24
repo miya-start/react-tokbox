@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { OTSession, preloadScript } from 'opentok-react'
 import ConnectionStatus from './components/ConnectionStatus'
 import CustomOTStreams from './components/CustomOTStreams'
@@ -11,15 +11,24 @@ import { SubscriberNumberProvider } from './contexts/subscriber-number-context'
 import { VideoProvider } from './contexts/video-context'
 
 function App({ apiKey, sessionId, token }) {
-  const [connected, setConnected] = useState(false)
+  const [isConnected, setIsConnected] = useState(false)
   const [error, setError] = useState()
+  const savedIsConnected = useRef(isConnected)
 
-  const sessionConnected = () => setConnected(true)
-  const sessionDisconnected = () => setConnected(false)
+  const sessionConnected = () => setIsConnected(true)
+  const sessionDisconnected = () => setIsConnected(false)
   const handleError = (err) => {
     setError('Failed to connect!')
     console.error(err)
   }
+
+  useEffect(() => {
+    if (savedIsConnected.current !== isConnected) {
+      savedIsConnected.current = isConnected
+      setIsConnected(isConnected)
+      console.log('isConnected:', isConnected)
+    }
+  }, [isConnected, setIsConnected])
 
   return (
     <OTSession
@@ -33,7 +42,6 @@ function App({ apiKey, sessionId, token }) {
         <SubscriberNumberProvider>
           <VideosWrapper>
             {error && <HeadlessDialog msg={error} />}
-            {/* <ConnectionStatus connected={connected} /> */}
             <Publisher />
             <CustomOTStreams>
               <Subscriber />

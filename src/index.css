@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .connectionStatus {
-    padding-top: 20px;
-    margin-left: 5%;
-    font-size: 1.5em;
-  }
-}
-
 .OTPublisherContainer,
 .OTSubscriberContainer {
   @apply w-full !important;
