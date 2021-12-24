@@ -6,14 +6,22 @@ const VideoDispatchContext = createContext()
 function videoReducer(state, action) {
   switch (action.type) {
     case 'video':
-      return { ...state, isVideo: !state.isVideo }
+      return { ...state, isVideo: !state.isVideo, isScreen: false }
+    case 'audio':
+      return { ...state, isAudio: !state.isAudio }
+    case 'screen':
+      return { ...state, isVideo: true, isScreen: !state.isScreen }
     default:
       throw new Error(`Unhandled action type: ${action.type}`)
   }
 }
 
 function VideoProvider({ children }) {
-  const [state, dispatch] = useReducer(videoReducer, { isVideo: true })
+  const [state, dispatch] = useReducer(videoReducer, {
+    isVideo: true,
+    isAudio: true,
+    isScreen: false,
+  })
   return (
     <VideoStateContext.Provider value={state}>
       <VideoDispatchContext.Provider value={dispatch}>

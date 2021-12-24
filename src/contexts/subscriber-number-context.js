@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react'
+import { MENU_HEIGHT } from '../utils/config'
 
 const SubscriberNumberStateContext = createContext(0)
 const SubscriberNumberUpdateContext = createContext()
@@ -33,7 +34,7 @@ function menuHeightSpace(
   windowHeight,
   videoHeight,
   rowNumber,
-  menu_height = 50 // px
+  menu_height = MENU_HEIGHT // px
 ) {
   const windowSpace = windowHeight - videoHeight * rowNumber
   return windowSpace > menu_height
