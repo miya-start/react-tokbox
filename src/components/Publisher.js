@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useCalcVideoSize } from '../contexts/subscriber-number-context'
 import CustomOTPublisher from './CustomOTPublisher'
+import HeadlessDialog from './HeadlessDialog'
+import { useCalcVideoSize } from '../contexts/subscriber-number-context'
 import { useVideoState } from '../contexts/video-context'
 
 function Publisher() {
@@ -14,19 +15,19 @@ function Publisher() {
   }
 
   return (
-    <CustomOTPublisher
-      properties={{
-        publishAudio: isAudio,
-        publishVideo: isVideo,
-        videoSource: isScreen === true ? 'screen' : undefined,
-      }}
-      videoWidth={videoWidth}
-      videoHeight={videoHeight}
-      onError={handleError}
-    />
-    // <>
-    //   Publisher
-    //   {error && <div id="error">{error}</div>}
+    <>
+      <CustomOTPublisher
+        properties={{
+          publishAudio: isAudio,
+          publishVideo: isVideo,
+          videoSource: isScreen === true ? 'screen' : undefined,
+        }}
+        videoWidth={videoWidth}
+        videoHeight={videoHeight}
+        onError={handleError}
+      />
+      {error && <HeadlessDialog msg={error} />}
+    </>
   )
 }
 export default Publisher

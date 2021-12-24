@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { OTSession, preloadScript } from 'opentok-react'
 import ConnectionStatus from './components/ConnectionStatus'
 import CustomOTStreams from './components/CustomOTStreams'
+import HeadlessDialog from './components/HeadlessDialog'
 import Menu from './components/Menu'
 import Publisher from './components/Publisher'
 import Subscriber from './components/Subscriber'
@@ -31,7 +32,7 @@ function App({ apiKey, sessionId, token }) {
       <VideoProvider>
         <SubscriberNumberProvider>
           <VideosWrapper>
-            {/* {error && <div id="error">{error}</div>} */}
+            {error && <HeadlessDialog msg={error} />}
             {/* <ConnectionStatus connected={connected} /> */}
             <Publisher />
             <CustomOTStreams>

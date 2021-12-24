@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CustomOTSubscriber from './CustomOTSubscriber'
+import HeadlessDialog from './HeadlessDialog'
 
 function Subscriber() {
   const [error, setError] = useState()
@@ -11,7 +12,6 @@ function Subscriber() {
 
   return (
     <>
-      {error && <div id="error">{error}</div>}
       <CustomOTSubscriber
         properties={{
           subscribeToAudio: true,
@@ -19,6 +19,7 @@ function Subscriber() {
         }}
         onError={handleError}
       />
+      {error && <HeadlessDialog msg={error} />}
     </>
   )
 }

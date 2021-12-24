@@ -8,9 +8,6 @@
     margin-left: 5%;
     font-size: 1.5em;
   }
-  .error {
-    @apply text-red-500;
-  }
 }
 
 .OTPublisherContainer,
