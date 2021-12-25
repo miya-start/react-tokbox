@@ -9,7 +9,7 @@ import VideosWrapper from './components/VideosWrapper'
 import { SubscriberNumberProvider } from './contexts/subscriber-number-context'
 import { VideoProvider } from './contexts/video-context'
 
-function App({ apiKey, sessionId, token }) {
+function App() {
   const [isConnected, setIsConnected] = useState(false)
   const [error, setError] = useState()
   const savedIsConnected = useRef(isConnected)
@@ -31,9 +31,9 @@ function App({ apiKey, sessionId, token }) {
 
   return (
     <OTSession
-      apiKey={apiKey}
-      sessionId={sessionId}
-      token={token}
+      apiKey={process.env.REACT_APP_TOKBOX_API_KEY}
+      sessionId={process.env.REACT_APP_TOKBOX_SESSION_ID}
+      token={process.env.REACT_APP_TOKBOX_TOKEN}
       eventHandlers={{ sessionConnected, sessionDisconnected }}
       onError={handleError}
     >

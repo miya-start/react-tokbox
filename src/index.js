@@ -6,11 +6,7 @@ import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      apiKey={process.env.REACT_APP_TOKBOX_API_KEY}
-      sessionId={process.env.REACT_APP_TOKBOX_SESSION_ID}
-      token={process.env.REACT_APP_TOKBOX_TOKEN}
-    />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 )
