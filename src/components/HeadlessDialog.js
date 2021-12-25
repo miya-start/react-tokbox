@@ -17,7 +17,7 @@ export default function ErrorDialog({ msg }) {
       onClose={() => setIsOpen(false)}
     >
       <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-      <div className="p-4 text-trueGray-200 bg-trueGray-900 shadow-2xl rounded-md">
+      <div className="p-4 text-neutral-200 bg-neutral-900 shadow-2xl rounded-md">
         <Dialog.Title>{msg}</Dialog.Title>
         <button
           className="float-right mt-1 mr-3"

@@ -1,4 +1,4 @@
-const { sky, trueGray } = require('tailwindcss/colors')
+const { sky, neutral } = require('tailwindcss/colors')
 
 module.exports = {
   content: ['./src/**/*.{js,jsx}', './public/index.html'],
@@ -7,9 +7,9 @@ module.exports = {
     extend: {
       colors: {
         sky,
-        trueGray,
-        'trueGray-750': '#353535',
-        'trueGray-850': '#1f1f1f',
+        neutral,
+        'neutral-750': '#353535',
+        'neutral-850': '#1f1f1f',
       },
     },
   },
